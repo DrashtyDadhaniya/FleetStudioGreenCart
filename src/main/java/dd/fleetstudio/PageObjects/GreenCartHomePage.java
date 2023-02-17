@@ -56,8 +56,6 @@ public class GreenCartHomePage extends CommonMethods {
 				}
 			}
 		}
-		System.out.println("**********************************"+ItemCountOnCartInfo.getText());
-		System.out.println("**********************************"+TotalPriceOnCartInfo.getText());
 	}
 
 	public CheckOutPage ProceedToCheckout() {

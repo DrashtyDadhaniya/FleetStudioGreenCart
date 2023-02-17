@@ -14,16 +14,17 @@ import dd.fleetstudio.TestComponents.BaseTest;
 
 public class EcommerceTest extends BaseTest {
 
-	@Test(priority = 1, enabled = true)
-	public void GreenCartE2E() throws InterruptedException {
+	@Test(priority = 1, enabled = true, dataProvider = "PromoCodeProvider")
+	public void GreenCartE2E(String promoCode) throws InterruptedException {
 
 		projectsPage = ecommerce.loginApplication("Drashty", "drashty.dadhaniya@gmail.com");
 		greenCartHomePage = projectsPage.clickOnProject();
 		
 		String[] itemsNeeded = { "Cucumber", "Brocolli", "Beetroot" };
+		
 		greenCartHomePage.addProductsToCart(itemsNeeded);
 		checkOutPage = greenCartHomePage.ProceedToCheckout();
-		String promoStatus = checkOutPage.EnterPromoCode("rahulshettyacademy");		//Correct promocode is - rahulshettyacademy
+		String promoStatus = checkOutPage.EnterPromoCode(promoCode);		//Correct promocode is - rahulshettyacademy
 		
 		Assert.assertTrue(promoStatus.contains("Code applied"));
 		//Assert.assertFalse(promoStatus.contains("Invalid code"), "Enter 'rahulshettyacademy' as promo code");
@@ -31,6 +32,12 @@ public class EcommerceTest extends BaseTest {
 		SelectDropDownElement(countryDropDown, "india");
 		String ThankYouMsg = checkOutPage.AgrreeTermsAndConditions();
 		Assert.assertTrue(ThankYouMsg.contains("Thank you"));
+	}
+	
+	@DataProvider
+	public Object[][] PromoCodeProvider() throws IOException {
+
+		return new Object[][] { { "rahulshettyacademy" }, { "fleetstudio" } };
 	}
 
 }

@@ -7,7 +7,7 @@
         <methods>
           <include name="launchApplication"/>
           <include name="tearDown"/>
-          <include name="GreenCartE2E"/>
+          <include name="GreenCartE2E" invocation-numbers="1"/>
         </methods>
       </class> <!-- dd.fleetstudio.Tests.EcommerceTest -->
     </classes>
