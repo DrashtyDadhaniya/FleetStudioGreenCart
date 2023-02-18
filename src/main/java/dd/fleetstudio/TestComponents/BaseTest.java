@@ -20,7 +20,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
 import dd.fleetstudio.PageObjects.CheckOutPage;
@@ -38,8 +40,9 @@ public class BaseTest {
 	public GreenCartHomePage greenCartHomePage;
 	public CheckOutPage checkOutPage;
 	
-	@BeforeTest(alwaysRun = true)
+	@BeforeMethod(alwaysRun = true)
 	public Ecommerce launchApplication() throws IOException {
+		System.out.println("In launchApplication method");
 		driver = initializeDriver();										//Initialize Drivers
 		ecommerce = new Ecommerce(driver);
 		ecommerce.goTo();
@@ -47,8 +50,9 @@ public class BaseTest {
 	}
 	
 
-	@AfterTest(alwaysRun = true, enabled = false)
+	@AfterMethod(alwaysRun = true, enabled = true)
 	public void tearDown() {
+		System.out.println("In tear down method");
 		driver.quit();
 	}
 	

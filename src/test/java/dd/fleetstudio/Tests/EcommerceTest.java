@@ -24,10 +24,10 @@ public class EcommerceTest extends BaseTest {
 		
 		greenCartHomePage.addProductsToCart(itemsNeeded);
 		checkOutPage = greenCartHomePage.ProceedToCheckout();
-		String promoStatus = checkOutPage.EnterPromoCode(promoCode);		//Correct promocode is - rahulshettyacademy
+		String promoStatus = checkOutPage.EnterPromoCode(promoCode);		
 		
 		Assert.assertTrue(promoStatus.contains("Code applied"));
-		//Assert.assertFalse(promoStatus.contains("Invalid code"), "Enter 'rahulshettyacademy' as promo code");
+		
 		WebElement countryDropDown = checkOutPage.PlaceOrderAndProceed();
 		SelectDropDownElement(countryDropDown, "india");
 		String ThankYouMsg = checkOutPage.AgrreeTermsAndConditions();
@@ -36,8 +36,11 @@ public class EcommerceTest extends BaseTest {
 	
 	@DataProvider
 	public Object[][] PromoCodeProvider() throws IOException {
-
-		return new Object[][] { { "rahulshettyacademy" }, { "fleetstudio" } };
+		
+		// rahulshettyacademy is a correct promocode & test should pass
+		// fleetstudio is a incorrect promocode & test should fail
+			
+		return new Object[][] { { "fleetstudio" }, { "rahulshettyacademy" } };		
 	}
 
 }
